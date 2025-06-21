@@ -81,7 +81,7 @@ Medimind features a **modern, responsive web interface** built with **Gradio**. 
 
 Watch a full demonstration of Medimind’s functionality, including setup, training, and live interaction.
 
- [Watch the Demo Video](https://youtube.com/your-demo-link)
+ [Watch the Demo Video](https://youtu.be/CtdxsC5Alv0)
 
 ---
 
