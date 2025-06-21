@@ -87,7 +87,7 @@ Watch a full demonstration of Medimind’s functionality, including setup, train
 
 ## 9. Getting Started
 
-### 🔧 Clone the Repository
+###  Clone the Repository
 
 ```bash
 git clone https://github.com/dntwaritag/Medimind_ChatBot.git
@@ -95,7 +95,7 @@ cd Medimind
 ```
 
 
-### 📦 Install Dependencies
+###  Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -103,13 +103,13 @@ pip install -r requirements.txt
 
 > Alternatively, dependencies are auto-installed via `medimindbot.py`.
 
-### 🔐 API Keys
+###  API Keys
 
 To enable Groq integration, set your `GROQ_API_KEY` environment variable or use Colab secrets.
 
 Ensure your dataset path (`[drugs_side_effects_drugs_com.csv](https://drive.google.com/file/d/1k21j42Wq7YYb_rsB-NGafZkFcAThbzzB/view?usp=drive_link)`) is correctly configured.
 
-### ▶️ Run the Chatbot
+###  Run the Chatbot
 
 ```bash
 python MedimindBot.py
