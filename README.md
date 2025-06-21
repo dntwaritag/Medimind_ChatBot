@@ -1,96 +1,142 @@
-# Medimind_ChatBot:  A Domain-Specific Medical Chatbot
+#  Medimind: A Domain-Specific Medical Chatbot
 
-1. Introduction
-Medimind is an intelligent chatbot designed to provide accurate information about medications, their side effects, and related medical conditions. It uses advanced NLP techniques, including a fine-tuned Transformer model and a Retrieval-Augmented Generation (RAG) system, to deliver precise and relevant responses within the healthcare domain.
+---
 
-2. Features
-Domain-Specific Answers: Provides information focused on drugs, side effects, and medical conditions.
+## 1. Introduction
 
-Intelligent Query Handling: Understands user questions and retrieves relevant information.
+**Medimind** is a smart, domain-specific chatbot designed to deliver accurate and informative responses about medications, side effects, and related medical conditions. Powered by a fine-tuned **Transformer model** and an advanced **Retrieval-Augmented Generation (RAG)** framework, it merges generative AI with medical data retrieval to provide **fact-based and context-aware answers**.
 
-Retrieval-Augmented Generation (RAG): Combines information retrieval with generative AI for factually grounded responses.
+---
 
-Out-of-Domain Rejection: Gracefully declines to answer non-medical questions.
+## 2. Key Features
 
-User-Friendly Interface: An intuitive web interface built with Gradio.
+* **Domain-Specific Intelligence**: Focused on medications, adverse effects, and health-related questions.
+* **RAG Architecture**: Combines context retrieval with generative modeling for grounded responses.
+* **Smart Query Handling**: Identifies and rejects non-medical questions politely.
+* **Gradio Interface**: Offers a clean, web-based UI for seamless user interaction.
+* **Optional LLM Integration**: Supports Groq’s LLaMA 3.1 model for enhanced generation when API access is available.
 
-Configurable AI: Option to use an advanced LLM (Groq) if an API key is provided.
+---
 
-3. Domain Focus
-Medimind is specifically aligned with the healthcare domain, focusing on drug information and side effects to ensure accuracy and relevance.
+## 3. Domain Focus
 
-4. Dataset
-The chatbot's knowledge base is built using the drugs_side_effects_drugs_com.csv dataset, which contains structured information on drug names, medical conditions, and reported side effects.
+Medimind is tailored for the **healthcare domain**, specializing in drug-related queries. It ensures safe, specific, and relevant responses for users seeking guidance on side effects or medication use.
 
-Key Preprocessing Steps:
-Handling missing values.
+---
 
-Creating diverse question-answer pairs for fine-tuning.
+## 4. Dataset
 
-Tokenization using Hugging Face's AutoTokenizer.
+The chatbot is trained on the `[drugs_side_effects_drugs_com.csv](https://drive.google.com/file/d/1k21j42Wq7YYb_rsB-NGafZkFcAThbzzB/view?usp=drive_link)` dataset, which includes user-submitted reviews detailing drug names, side effects, medical conditions, and ratings.
 
-Splitting data into training, validation, and test sets.
+### Preprocessing Steps:
 
-5. Model Used
-Core Model: google/flan-t5-small, fine-tuned on the medical dataset.
+* Filling or removing missing values
+* Generating diverse Q\&A pairs
+* Tokenization using Hugging Face’s AutoTokenizer
+* Splitting into training, validation, and test sets
 
-Embedding Model: sentence-transformers/all-MiniLM-L6-v2 for the vector database.
+---
 
-Vector Database: ChromaDB for efficient information retrieval.
+## 5. Models Used
 
-Optional LLM: llama-3.1-70b-versatile (via Groq API) for advanced response generation.
+| Component       | Model                                    |
+| --------------- | ---------------------------------------- |
+| Core QA Model   | `google/flan-t5-small` (fine-tuned)      |
+| Baseline Model  | `google/flan-t5-base`                    |
+| Embedding Model | `sentence-transformers/all-MiniLM-L6-v2` |
+| Vector Database | ChromaDB                                 |
+| Optional LLM    | `llama-3.1-70b-versatile` via Groq API   |
 
-The system uses a RAG framework: it retrieves relevant context from the database first, then generates an answer based on that context.
+The system retrieves top-k documents, then generates a response grounded in that context using a Transformer-based model.
 
-6. Performance Highlights
-The fine-tuned flan-t5-small model showed significant improvements over the flan-t5-base baseline across various NLP metrics like ROUGE, BLEU, METEOR, and Exact Match Accuracy, demonstrating effective domain adaptation. Qualitatively, Medimind provides meaningful responses and effectively rejects out-of-domain queries.
+---
 
-7. User Interface
-The chatbot features a user-friendly web interface built with Gradio, providing clear input/output areas, an option to use advanced AI, and sections for retrieved context and sources. A prominent disclaimer reminds users about the informational nature of the chatbot.
+## 6. Performance Overview
 
-8. Demo Video
-A demonstration video showcasing Medimind's functionality, user interactions, and key features will be added here.
+The fine-tuned Flan-T5 model outperformed the baseline across all major metrics:
 
-Watch the Demo Video on YouTube
+| Metric       | Fine-tuned | Baseline |
+| ------------ | ---------- | -------- |
+| **ROUGE-1**  |  53.9%     | 39.2%    |
+| **BLEU**     |  44.7%     | 31.4%    |
+| **METEOR**   |  47.9%     | 36.2%    |
+| **Accuracy** |  71.3%     | 52.0%    |
 
-9. Setup and Run
-Clone the repository:
+Medimind also excels in **qualitative testing**, generating reliable answers while rejecting irrelevant queries effectively.
 
-git clone https://github.com/your-username/Medimind.git
+---
+
+## 7. User Interface
+
+Medimind features a **modern, responsive web interface** built with **Gradio**. Key components include:
+
+* Question input with optional Groq AI toggle
+* Clear response area with drug and condition summaries
+* Accordion for retrieved context, sources, and metrics
+* Disclaimer reminding users to consult healthcare professionals
+
+---
+
+## 8. Demo Video
+
+Watch a full demonstration of Medimind’s functionality, including setup, training, and live interaction.
+
+ [Watch the Demo Video](https://youtube.com/your-demo-link)
+
+---
+
+## 9. Getting Started
+
+### 🔧 Clone the Repository
+
+```bash
+git clone https://github.com/dntwaritag/Medimind_ChatBot.git
 cd Medimind
+```
 
-(Replace with your actual repository URL)
 
-Install dependencies:
+### 📦 Install Dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-(Or rely on the pip install commands within medimindbot.py).
+> Alternatively, dependencies are auto-installed via `medimindbot.py`.
 
-API Keys: If using Groq, set your GROQ_API_KEY as an environment variable or in Colab secrets. Ensure your data path is correctly configured for drugs_side_effects_drugs_com.csv.
+### 🔐 API Keys
 
-Run the script:
+To enable Groq integration, set your `GROQ_API_KEY` environment variable or use Colab secrets.
 
-python medimindbot.py
+Ensure your dataset path (`[drugs_side_effects_drugs_com.csv](https://drive.google.com/file/d/1k21j42Wq7YYb_rsB-NGafZkFcAThbzzB/view?usp=drive_link)`) is correctly configured.
 
-Access UI: Open the local URL provided by Gradio in your browser.
+### ▶️ Run the Chatbot
 
-10. Examples
-"What are the side effects of Ibuprofen?"
+```bash
+python MedimindBot.py
+```
 
-"Tell me about the side effects of Lisinopril for high blood pressure."
+Once launched, access the chatbot via the Gradio-provided local URL.
 
-"Is Amoxicillin safe to use?"
+---
 
-"What is the capital of France?" (Out-of-domain query)
+## 10. Sample Queries
 
-11. Future Plans
-Expand medical domain coverage.
+Try the following:
 
-Improve out-of-domain detection.
+* "What are the side effects of **Ibuprofen**?"
+* "Tell me about the side effects of **Lisinopril** for **high blood pressure**."
+* "Is **Amoxicillin** safe to use?"
+* "What is the capital of France?" → *Out-of-domain query*
 
-Add conversational memory.
+---
 
-Introduce multilingual support.
+## 11. Future Improvements
 
-Integrate with external medical APIs.
+* Expand coverage across more medical subdomains
+* Improve detection and rejection of out-of-scope queries
+* Add conversational memory for follow-up questions
+* Support multilingual Q\&A
+* Integrate verified external medical APIs
+
+---
+
